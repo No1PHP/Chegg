@@ -1,0 +1,33 @@
+server:
+  port: 8002
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: test
+  application:
+    name: chegg
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource          # datasource type：HikariCP
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #Please change this to your own datasource and port
+    url: jdbc:mysql://localhost:3306/Chegg?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    #Please change this to your own username and password!
+    username: root
+    password: wzn990826
+    hikari:
+      # default configuration
+      connection-timeout: 30000
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 600000
+      pool-name: DateSourceHikariCP
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+mybatis:
+  config-path: mybatis-config.xml
+  type-aliases-package: chegg.model.pojo
+  mapper-path: classpath:mapper/*.xml

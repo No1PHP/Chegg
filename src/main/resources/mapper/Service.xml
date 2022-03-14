@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chegg.service.UserService">
+  <select id="getStudentsBySchool" resultType="chegg.model.pojo.Student">
+    SELECT name, email, school
+    FROM student
+    WHERE school=#{school}
+  </select>
+  <select id="getStudents" resultType="chegg.model.pojo.Student">
+    SELECT name, email, school
+    FROM student
+  </select>
+  <select id="getProfs" resultType="chegg.model.pojo.Professor">
+    SELECT name, email, school
+    FROM professor
+  </select>
+  <select id="getProfessorsByCourse" resultType="chegg.model.pojo.Professor">
+    Select p.name
+    From professor p, (
+      Select pc.professorId
+      From professor_course pc, course c
+      Where c.courseName = #{courseName} and c.courseId = pc.courseId) as inline_view
+    Where p.professorId = inline_view.professorId;
+
+  </select>
+  <select id="getCoursesByProfessor" resultType="chegg.model.pojo.Course">
+      SELECT c.courseName
+      FROM course c, (
+        SELECT pc.courseId
+        From professor_course pc, professor p
+        where p.name= #{professorName} and p.professorId=pc.professorId) as inline_view
+      where c.courseId = inline_view.courseId;
+  </select>
+  <select id="getStudentByEmail" resultType="chegg.model.pojo.Student">
+    SELECT name
+    FROM student
+    where email=#{email}
+  </select>
+  <select id="getProfessorByEmail" resultType="chegg.model.pojo.Professor">
+    SELECT name
+    FROM professor
+    where email=#{email}
+  </select>
+
+  <insert id="addStudent" useGeneratedKeys="true" keyProperty="studentId"
+    keyColumn="studentId" parameterType="chegg.model.pojo.Student">
+    INSERT INTO student(name, email, school) VALUES (#{name},#{email},#{school})
+  </insert>
+  <update id="updateStudentInfo" parameterType="chegg.model.pojo.Student">
+    update student
+    <set>
+      <if test="name != null">name=#{name}</if>
+      <if test="email != null">email=#{email}</if>
+      <if test="school != null">school=#{school}</if>
+    </set>
+    WHERE studentId=#{studentId}
+  </update>
+  <delete id="deleteStudent">
+    DELETE FROM
+    student
+    WHERE studentId = #{studentId}
+  </delete>
+
+  <insert id="addProfessor" useGeneratedKeys="true" keyProperty="professorId"
+    keyColumn="professorId" parameterType="chegg.model.pojo.Professor">
+    INSERT INTO professor(name, email, school) VALUES (#{name},#{email},#{school})
+  </insert>
+  <update id="updateProfessorInfo" parameterType="chegg.model.pojo.Professor">
+    update professor
+    <set>
+      <if test="name != null">name=#{name}</if>
+      <if test="email != null">email=#{email}</if>
+      <if test="school != null">school=#{school}</if>
+    </set>
+    WHERE professorId=#{professorId}
+  </update>
+  <delete id="deleteProfessor">
+    DELETE FROM
+      professor
+    WHERE professorId = #{professorId}
+  </delete>
+</mapper>
