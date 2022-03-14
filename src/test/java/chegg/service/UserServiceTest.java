@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import chegg.model.pojo.Student;
 import java.sql.SQLException;
 import java.util.List;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ class UserServiceTest {
 
 
   @Test
-  @Ignore
   void getStudents() throws SQLException {
     List<Student> students = userService.getStudents();
     Assertions.assertEquals(students.size(), 2);

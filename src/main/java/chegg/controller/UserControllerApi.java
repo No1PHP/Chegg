@@ -130,6 +130,7 @@ public interface UserControllerApi {
    * @param request the request
    * @return the prof with courses
    */
+  @GetMapping("/findprofWithCourses")
   public JSONResult getProfWithCourses(HttpServletRequest request);
 
   /**
