@@ -8,11 +8,11 @@ port: 8002
 change to your own used server port
 (2) datasource, change connection parameter to your own, including:  
 url, username, password  
-####3. Check pom.xml, change JDK version to your own machine's version
-####4. Run db.sql file
-####5. Build project
-####6. Run Application 
-Entry: src/main/java/chegg/Application.java  
+####3. Check pom.xml, change JDK version to your own machine's version    
+####4. Run db.sql file  
+####5. Build project  
+####6. Run Application    
+Entry: src/main/java/chegg/Application.java    
 
 ### API
 All the API is provided in the src/main/java/chegg/controller .   
