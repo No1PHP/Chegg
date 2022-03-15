@@ -5,7 +5,7 @@
 configure the parameter   
 (1) server:
 port: 8002  
-change to your own used server port
+change to your own used server port   
 (2) datasource, change connection parameter to your own, including:  
 url, username, password  
 ####3. Check pom.xml, change JDK version to your own machine's version    
